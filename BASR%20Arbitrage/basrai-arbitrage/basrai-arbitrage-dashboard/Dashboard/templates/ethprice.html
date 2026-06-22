@@ -1,0 +1,2513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Price Difference</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <style>
+        /* General styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container-fluid {
+            padding-right: 2px;
+            padding-left: 2px;
+        }
+        .logo{
+            height: 103px;
+            /* width: 119px; */
+            width: 152px;
+            padding-left: 0px;
+            padding-right: 0px;
+            margin-left: 20px;
+            
+        }
+        .logo img{
+            height: 100%;
+            width: 100%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+            overflow-x: hidden;
+            
+        }
+        .table1 {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+        tbody{
+            border: 1px groove #ccc;
+        }
+        th, td {
+            padding: 4px;
+            padding-right: 7px;
+            padding-left: 2px;
+            text-align: center;
+            /* border: 1px groove #ccc; */
+            /* width: 30px; */
+            font-size: 14px;
+            font-weight: 700;
+            /* max-width: 20px; */
+            overflow: hidden;
+        }
+
+        .hrow th {
+            font-size: 13px;
+            font-weight: bold;
+            border: 1px groove white;
+            background-color: #d9d9d9;
+            color: #3e5a83
+        }
+
+        .hrow1 th {
+            background-color: #00ff00;
+            font-size: 1em;
+            text-align: left;
+            padding:0px;
+        }
+
+        .hrow2 th {
+            font-size: 1em;
+            text-align: center;
+        }
+
+        .bcolor {
+            background-color: #c7a3f7;
+        }
+
+        .highlight {
+            /* background-color: #0add42 !important; */
+            background-color: #0add4266 !important;
+
+            
+            /* color: black !important; */
+        }
+
+        .highlight1 {
+            /* background-color: #ff6eaddc; */
+            
+            background-color: #ff6ead6e;
+
+        }
+        .colorred {
+            background-color: #f43400 !important;
+            font-weight: 900 !important;
+            font-size: 9px;
+        }
+        .colorblue {
+            background-color: rgb(98, 0, 255) !important;
+        }
+        .background_blue{
+            /* background-color: #4682b8; */
+            background-color: #7ea8ce3d;
+            /* color: white; */
+            
+        }
+        #secondtable{
+           
+            border-collapse: collapse;
+           
+            margin-left: auto;
+            margin-right: auto;
+            /* width: 50%; */
+            text-align: center;
+        }
+
+        #secondtable .shrow th {
+            background-color: #ffc000;
+            text-align: center;
+            /* max-width: 20px; */
+            /* width: 20px; */
+            padding: 2px;
+            height: 19px;
+            font-size: 13px;
+        }
+        #secondtable tbody td {
+            /* border: 1px solid rgb(73, 63, 63); */
+            text-align: center;
+            max-width: 20px; 
+            width: 20px;
+            padding: 2px;
+            height: 25px;
+            font-size: 13px;
+        }
+        .white_bg{
+            background-color: white !important;
+        }
+        .bluegreen{
+            background-color: #8ea9db !important;
+        }
+        .ok_background{
+            background-color: #c5e0b5;
+            font-weight: 600 !important;
+            border: 1px solid white;
+            font-size: 9px;
+            max-width: 38px;
+            width: 34px;
+        }
+        .first_column{
+            border: 1px groove #ffffff;
+            background-color: lightgrey;
+            font-weight: 700;
+            font-size: 12px !important;
+            max-width: 50px;
+            width: 30px;
+            color: #3e5a83;
+            
+        }
+        header {
+            background-color: #ebebeb;
+            color: #535252;
+            padding: 20px;
+            width: 99%;
+            font-family: serif;
+            text-align: center;
+        }
+        .heading .col-md-12{
+            color: #3e5a83;
+        }
+        .heading {
+            display: inline-block;
+            vertical-align: middle;
+            /* width: 99%; */
+        }
+        .cell_border{
+            border: 1px groove #ccc;
+        }
+        .sectablecont{
+            margin-top: 3%;
+            padding-right: 13px;
+            padding-left: 16px
+        }
+        .sectablecont table td, th{
+            font-size: 13px;
+        }
+        .sectablecont .session_name{
+            display: flex;
+            justify-content: center; /* Horizontally center the h4 tag */
+            align-items: center;   /* Vertically center the h4 tag */
+            height: 70px;         /* Example height for the div */
+            background-color: #f3f3f3;
+            color: #374e80;
+        
+        }
+        .sectablecont table th{
+            background-color: #f3f3f3;
+            border: 1px solid lightgrey;
+            color: #3e5a83;
+        }
+        .sectablecont table td{
+            color: #3e5a83;
+            /* background-color: #f3f3f3; */
+            border: 1px solid lightgrey;
+        }
+        .sectablecont td:first-child td{
+            background-color: #f3f3f3; /* Replace with your desired color */
+        }
+        .sectablecont tr:nth-child(odd) td{
+            background-color: white ;
+        }
+
+        .sectablecont tr:nth-child(even) td{
+            background-color: #dae3f5;
+        }
+        .sectablecont td:first-child{
+            background-color: #f3f3f3 !important; /* Replace with your desired color */
+        }
+        .currency_drop h3{
+            color: red;
+        }
+        .header1{
+            background-color: #f2f2f2;
+        }
+        .currency_drop h2{
+            margin-bottom: 0.1rem !important;
+        }
+        
+        .price_threshold{
+            /* margin-bottom: 1px; */
+            width: 99%;
+            text-align: left;
+            display: flex;
+            justify-content: center; /* Horizontally center the h4 tag */
+            align-items: center;   /* Vertically center the h4 tag */
+            height: 52px;     
+            color: #3e5a83;    /* Example height for the div */
+            margin-left: 3px;
+        }
+        .price_threshold{
+            /* border: 2px solid white; */
+            border-bottom: 2px solid white;
+            border-top: 2px solid white;
+        }
+        .price_threshold .custom-div{
+            /* background-color: #fff2cd; */
+            height: 100%;
+            /* border-left: 1px solid white;
+            border-right: 1px solid white; */
+            margin-bottom: 10px;
+            padding-left: 0px;
+            padding-right: 0px;
+            height: 37px;
+        }
+        .bside{
+            display: flex;
+            justify-content: center; /* Horizontally center the h4 tag */
+            align-items: center;   /* Vertically center the h4 tag */
+            height: 41px;
+            --bs-gutter-x: 0rem;
+             
+        }
+        .bside .custom-div{
+            color: red;
+            font-weight: 900;
+            background-color: #d9d9d9;
+            height: 100%;
+            padding-top: 9px;
+            border: 1px solid white;
+        }
+        .bside .col-md-3{
+            background-color: white;
+            height: 100%;
+        }
+        input[type='number'], select{
+            background-color: #fff2cd;
+            border: none;
+        }
+        #currency_option{
+            background-color: #fff2cd; /* Light blue background */
+            border: 1px solid #ccc;
+            color: #333; /* Text color */
+            padding: 10px;
+            border-radius: 5px;
+            appearance: none; /* Remove default arrow in some browsers */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        #secondtable td{
+            vertical-align: middle;
+            max-width: 20px;
+            width: 20px;
+            text-align: left;
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            text-align: center;
+            padding: 3PX;
+            font-size: 16px;
+            font-weight: bold;
+            /* background-color: #f0f0f0;
+            border: 1px solid #ccc; */
+            height: 107%;
+            color: red;
+        }
+        table{
+            border-collapse: collapse;
+            width: 100%; /* Adjust width as needed */
+            margin-left: auto;
+        }
+        #dataTable{
+            table-layout: fixed; /* Ensures table cells do not expand */
+            width: 200%; /* Ensures the table occupies the full width of the container */
+            background-color: white;
+            margin-top: 3px;
+            margin-top: 13px;
+            margin-right: -3px;
+            border: 1px solid white;
+            
+           
+        }
+        #dataTable td{
+            width: 139px; /* Adjust this width as needed */
+            overflow: hidden;
+            text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+            /* white-space: nowrap;  */
+
+            
+        }
+        #dataTable th{
+            width: 139px;
+            overflow: hidden;
+            
+        }
+        td:first-child, th:first-child{
+        /* td:nth-child(2), th:nth-child(2) { */
+            position: sticky;
+            left: 0;
+            /* background-color: #f1f1f1; */
+            z-index: 1;
+        }
+
+        td:nth-child(2), th:nth-child(2) {
+            left: 100px; /* Adjust according to the width of the first column */
+        }
+        
+        .container-fluid-table{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background-color: lightgrey;
+            position: relative;
+            overflow-x: auto;
+        }
+        @media (max-width: 900.98px) {
+            .custom-div h5 {
+                font-size: .6rem; /* Smaller font size on small screens */
+            }
+            .custom-div h4 {
+                font-size: 0.5rem; /* Smaller font size on small screens */
+            }
+            .custom-div h6{
+                font-size: 0.7rem; /* Smaller font size on small screens */
+            }
+        }
+        .form-control{
+            line-height: 2.2em;
+        }
+        .custom-div{
+            height:54px !important;
+            /* margin-left: 2px; */
+        }
+        .sectistcolumn{
+            text-align: left !important;
+        }
+        .nav-item{
+            margin-left: 13px;
+            /* margin-right: 13px; */
+            width: 103px;
+        }
+        .nav-item a{
+            background-color: #d9d9d9 !important;
+            width: 100%;
+            color: #3e5a83;
+        }
+        /* .btn-custom {
+            background-color: grey;
+            color: white;
+        } */
+        .btn-custom.active {
+            background-color: darkgrey;
+        }
+        .linkprice{
+            height: 20px;
+            /* border: 1px solid grey; */
+            vertical-align: middle;
+            padding-bottom: 29px;
+            background-color: #d9d9d9;
+            margin-top: 10px;
+            margin-left: 18px;
+            width: 125px;
+            
+        }
+        .linkprice a{
+            color: #3e5a83;
+            text-decoration: none;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid header1">
+        <div class="row" style="width: 99%;">
+           
+            <div class="col-md-1 col-sm-1 col-1 logo"><a href="/"><img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo"></a></div>
+
+            <div class="col-md-9 col-sm-9 col-9 heading">
+                <div class="row">
+                    <div class="col-md-12"><h2>LIVE SESSION DASHBOARD FOR</h2></div>
+                
+                </div>
+                <div class="row">
+                    <div class="currency_drop">
+                        <h3 id="currency_name_header">ETHUSDT</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12"><h4>Trade Across 25 Centralized Exchanges</h4></div>
+                
+                </div>
+            </div>
+            <div class="col-md-1 col-sm-1 col-1 linkprice"><a href="/ethvalue" style="text-align: right;">Value Difference</a></div>
+
+        </div>
+        <div class="row price_threshold">
+            <div class="col-lg-3 col-md-3 col-sm-3 custom-div" ><h5>Price Difference<br> Threshold in USDT</h5></div>
+            <div class="col-lg-7 col-md-7 col-sm-7 custom-div" >
+                <table class="table1">
+                    <thead>
+                        <tr class="hrow1">
+                            <!-- <th style="width:35%">Threshold:</th> -->
+                            <th  style="background-color: white;">
+                                <form id="searchForm">
+                                    <input type="number" class="form-control" id="searchValue" name="searchValue" min="0">
+                                </form>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 custom-div"></div>
+        </div>
+        <div class="row price_threshold">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="btn btn-custom" href="/btc" role="button">BTC</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-custom mx-1" href="/eth" role="button">ETH</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-custom mx-1" href="/ethbtc" role="button">ETHBTC</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-custom mx-1" href="/sol" role="button">SOL</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-custom mx-1" href="/bch" role="button">BCH</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- <div class="col-lg-3 col-md-3 col-sm-3 custom-div"><h5>Target Pair to Track</h5></div>
+            <div class="col-lg-7 col-md-7 col-sm-7 custom-div">                
+                <select class="form-select" id="currency_option" name="sellist1">
+                    <option>BTCUSDT</option>
+                    <option>ETHUSDT</option>
+                    <option>SOLUSDT</option>
+                    <option>BCHUSDT</option>
+                </select>
+            </div> -->
+            <div class="col-lg-2 col-md-2 col-sm-2 custom-div"></div>
+        
+        </div>
+        <div class="row bside">
+            <!-- <div class="col-lg-3 col-md-3 col-sm-3 custom-div"></div> -->
+            <div class="col-lg-12 col-md-12 col-sm-12 custom-div"><h5>BUY SIDE of the PRICE DIFFERENCE</h5></div>
+        </div>
+
+    </div>
+    <div class="container-fluid">
+        <div class="container-fluid container-fluid-table">
+        <!-- <div style="background-color: lightgrey;"> -->
+
+            <!-- <div class="table-responsive"> -->
+                <div class="vertical-text">
+                    SELL SIDE of the PAIR
+                </div>
+            <!-- <div class="white"> -->
+                <table lass="table table-bordered" id="dataTable">
+                    <thead>
+                        <tr class="hrow">
+                            <th style="max-width: 75px;">SPOT Exchange Combo</th>
+                            <th rowspan="2"style="max-width: 47px;">Status Check Flags</th>
+                            <th colspan="2">Binance</th>
+                            <th colspan="2">Kucoin</th>
+                            <th colspan="2">ByBit</th>
+                            <th colspan="2" style="padding-left: 9px; padding-right: 9px;">OKX</th>
+                            <th colspan="2">UpBit</th>
+                            <th colspan="2">Kraken</th>
+                            <th colspan="2">Bitget</th>
+                            <th colspan="2">Bitstamp</th>
+                            <th colspan="2">Gemini</th>
+                            <th colspan="2">Gate.io</th>
+                            <th colspan="2" style="padding-left: 9px; padding-right: 9px;">HTX</th>
+                            <th colspan="2">MEXC</th>
+                            <th colspan="2">Lbank</th>
+                            <th colspan="2">Bitmart</th>
+                            <th colspan="2">Deepcoin</th>
+                            <th colspan="2">Bitfinex</th>
+                            <th colspan="2">OrangeX</th>
+                            <th colspan="2">Bitvenus</th>
+                            <th colspan="2">Biconomy</th>
+                            <th colspan="2"style="padding-left: 9px; padding-right: 9px;">XT</th>
+                            <th colspan="2">Bitflyr</th>
+                            <th colspan="2">CoinW</th>
+                            <th colspan="2">Toobit</th>
+                            <th colspan="2">Tapbit</th>
+                            <th colspan="2">BingX</th>
+                        </tr>
+                        <tr class="hrow2">
+                            <th class="first_column"><br><br></th>
+                        
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="first_column">Binance</td>
+                            <td id="Binance_Status"></td>
+                            <td class="bcolor" id="Binance_LTP"></td>
+                            <td class="bcolor" id="BinanceBP_BinanceAP">0 </td>
+                            <td></td>
+                            <td id="BinanceBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_BybitAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_OKXAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_GateioAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_HTXAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_LbankAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_BitvenusAP"></td>                        
+                            <td></td>
+                            <td id="BinanceBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_XTAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="BinanceBP_BingXAP"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Kucoin</td>
+                            <td id="Kucoin_Status"></td>
+                            <td></td>
+                            <td id="KucoinBP_BinanceAP"></td>
+                            <td class="bcolor" id="Kucoin_LTP"></td>
+                            <td class="bcolor" id="KucoinBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_BybitAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_OKXAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_GateioAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_HTXAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_LbankAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_XTAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="KucoinBP_BingXAP"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td  class="first_column">ByBit</td>
+                            <td id="BybitStatus"></td>
+                            <td></td>
+                            <td id="BybitBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="BybitBP_KucoinAP"></td>
+                            <td class="bcolor" id="Bybit_LTP"></td>
+                            <td class="bcolor" id="BybitBP_BybitAP"></td>
+                            <td></td>
+                            <td id="BybitBP_OKXAP"></td>
+                            <td></td>
+                            <td id="BybitBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="BybitBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="BybitBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="BybitBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="BybitBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="BybitBP_GateioAP"></td>
+                            <td></td>
+                            <td id="BybitBP_HTXAP"></td>
+                            <td></td>
+                            <td id="BybitBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="BybitBP_LbankAP"></td>
+                            <td></td>
+                            <td id="BybitBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="BybitBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="BybitBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="BybitBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="BybitBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="BybitBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="BybitBP_XTAP"></td>
+                            <td></td>
+                            <td id="BybitBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="BybitBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="BybitBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="BybitBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="BybitBP_BingXAP"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td  class="first_column">OKX</td>
+                            <td id="OKX_Status"></td>
+                            <td></td>
+                            <td id="OKXBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="OKXBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="OKXBP_BybitAP"></td>
+                            <td class="bcolor" id="OKX_LTP"></td>
+                            <td class="bcolor" id="OKXBP_OKXAP"></td>
+                            <td></td>
+                            <td id="OKXBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="OKXBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="OKXBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="OKXBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="OKXBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="OKXBP_GateioAP"></td>
+                            <td></td>
+                            <td id="OKXBP_HTXAP"></td>
+                            <td></td>
+                            <td id="OKXBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="OKXBP_LbankAP"></td>
+                            <td></td>
+                            <td id="OKXBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="OKXBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="OKXBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="OKXBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="OKXBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="OKXBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="OKXBP_XTAP"></td>
+                            <td></td>
+                            <td id="OKXBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="OKXBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="OKXBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="OKXBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="OKXBP_BingXAP"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Upbit</td>
+                            <td id="Upbit_Status"></td>
+                            <td></td>
+                            <td  id="UpbitBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_BybitAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_OKXAP"></td>
+                            <td class="bcolor" id="Upbit_LTP"></td>
+                            <td class="bcolor" id="UpbitBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_GateioAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_HTXAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_LbankAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_XTAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="UpbitBP_BingXAP"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Kraken</td>
+                            <td id="Kraken_Status"></td>
+                            <td></td>
+                            <td id="KrakenBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_BybitAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_OKXAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_UpbitAP"></td>
+                            <td class="bcolor" id="Kraken_Ltp"></td>
+                            <td class="bcolor" id="KrakenBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_GateioAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_HTXAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_LbankAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_XTAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="KrakenBP_BingXAP"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Bitget</td>
+                            <td id="Bitget_Status"></td>
+                            <td></td>
+                            <td id="BitgetBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_BybitAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_OKXAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_KrakenAP"></td>
+                            <td class="bcolor" id="Bitget_LTP"></td>
+                            <td class="bcolor" id="BitgetBP_BitgetAP"></td>
+                            <td ></td>
+                            <td id="BitgetBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_GateioAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_HTXAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_LbankAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_XTAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="BitgetBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Bitstamp</td>
+                            <td id="Bitstamp_Status"></td>
+                            <td></td>
+                            <td id="BitstampBP_BinanceAP"></td>
+                            <td></td>
+                            <td  id="BitstampBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_BybitAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_OKXAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_BitgetAP"></td>
+                            <td class="bcolor" id="Bitstamp_LTP"></td>
+                            <td class="bcolor" id="BitstampBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_GateioAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_HTXAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_LbankAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_XTAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="BitstampBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Gemini</td>
+                            <td id="Gemini_Status"></td>
+                            <td></td>
+                            <td id="GeminiBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_BybitAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_OKXAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_BitstampAP"></td>
+                            <td class="bcolor" id="Gemini_LTP"></td>
+                            <td class="bcolor" id="GeminiBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_GateioAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_HTXAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_LbankAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_XTAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="GeminiBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Gate.io</td>
+                            <td id="Gateio_Status"></td>
+                            <td></td>
+                            <td id="GateiotBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_BybitAP"></td>
+                            
+                            <td></td>
+                            <td id="GateiotBP_OKXAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_BitgetAP"></td>
+                            <td></td>
+                            <!-- <td id="GateiotBP_BitgetAP"></td>
+                            <td></td> -->
+                            <td id="GateiotBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_GeminiAP"></td>
+                            
+                            <td class="bcolor" id="Gateio_LTP"></td>
+                            <td class="bcolor" id="GateiotBP_GateioAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_HTXAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_LbankAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_BitfinexAP"></td>
+                            
+                            <td></td>
+                            <td id="GateiotBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_XTAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="GateiotBP_BingXAP"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td  class="first_column">HTX</td>
+                            <td id="HTX_Status"></td>
+                            <td></td>
+                            <td id="HTXBP_BinanceAP"></td>
+                            <td></td>
+                            <td id= "HTXBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="HTXBP_BybitAP"></td>
+                            <td></td>
+                            <td id="HTXBP_OKXAP"></td>
+                            <td></td>
+                            <td id="HTXBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="HTXBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="HTXBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="HTXBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="HTXBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="HTXBP_GateioAP"></td>
+                            <td class="bcolor" id="HTX_LTP"></td>
+                            <td class="bcolor" id="HTXBP_HTXAP"></td>
+                            <td></td>
+                            <td id="HTXBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="HTXBP_LbankAP"></td>
+                            <td></td>
+                            <td id="HTXBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="HTXBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="HTXBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="HTXBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="HTXBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="HTXBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="HTXBP_XTAP"></td>
+                            <td></td>
+                            <td id="HTXBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="HTXBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="HTXBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="HTXBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="HTXBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">MEXC</td>
+                            <td id="MEXC_Status"></td>
+                            <td></td>
+                            <td id="MEXCBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_BybitAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_OKXAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_BitstampAP"></td>
+                            
+                            <td></td>
+                            <td id="MEXCBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_GateioAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_HTXAP"></td>
+                            <td class="bcolor" id="MEXC_LTP"></td>
+                            <td class="bcolor" id="MEXCBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_LbankAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_BitfinexAP"></td>
+                            
+                            <td></td>
+                            <td id="MEXCBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_XTAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="MEXCBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Lbank</td>
+                            <td id="Lbank_Status"></td>
+                            <td></td>
+                            <td id="LbankBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="LbankBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="LbankBP_BybitAP"></td>
+                            <td></td>
+                            <td id="LbankBP_OKXAP"></td>
+                            <td></td>
+                            <td id="LbankBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="LbankBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="LbankBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="LbankBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="LbankBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="LbankBP_GateioAP"></td>
+                            <td></td>
+                            <td id="LbankBP_HTXAP"></td>
+                            <td></td>
+                            <td id="LbankBP_MEXCAP"></td>
+                            <td class="bcolor" id="Lbank_LTP"></td>
+                            <td class="bcolor" id="LbankBP_LbankAP"></td>
+                            <td></td>
+                            <td id="LbankBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="LbankBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="LbankBP_BitfinexAP"></td>
+                            
+                            <td></td>
+                            <td id="LbankBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="LbankBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="LbankBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="LbankBP_XTAP"></td>
+                            <td></td>
+                            <td id="LbankBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="LbankBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="LbankBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="LbankBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="LbankBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td class="first_column">Bitmart</td>
+                            <td id="Bitmart_Status"></td>
+                            <td></td>
+                            <td id="BitmartBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_BybitAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_OKXAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_GateioAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_HTXAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_LbankAP"></td>
+                            <td class="bcolor" id="Bitmart_LTP"></td>
+                            <td class="bcolor" id="BitmartBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_BitfinexAP"></td>
+                            
+                            <td></td>
+                            <td id="BitmartBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_XTAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="BitmartBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Deepcoin</td>
+                            <td id="Deepcoin_Status"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_BybitAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_OKXAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_GateioAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_HTXAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_LbankAP"></td>
+                            
+                            <td></td>
+                            <td id="DeepcoinBP_BitmartAP"></td>
+                            <td class="bcolor" id="Deepcoin_LTP"></td>
+                            <td class="bcolor" id="DeepcoinBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_XTAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="DeepcoinBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Bitfinex</td>
+                            <td id="Bitfinex_Status"></td>
+                            <td></td>
+                            <td id="BitfinexBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_BybitAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_OKXAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_GateioAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_HTXAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_LbankAP"></td>
+                            
+                            <td></td>
+                            <td id="BitfinexBP_BitmartAP"></td>
+                            
+                            <td></td>
+                            <td id="BitfinexBP_DeepcoinAP"></td>
+                            <td class="bcolor" id="Bitfinex_LTP"></td>
+                            <td class="bcolor" id="BitfinexBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_XTAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="BitfinexBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">OrangeX</td>
+                            <td id="OrangeX_Status"></td>
+                            <td></td>
+                            <td id="OrangeXBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_BybitAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_OKXAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_GateioAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_HTXAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_LbankAP"></td>
+                            
+                            <td></td>
+                            <td id="OrangeXBP_BitmartAP"></td>
+                            
+                            <td></td>
+                            <td id="OrangeXBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_BitfinexAP"></td>
+                            <td class="bcolor" id="OrangeX_LTP"></td>
+                            <td class="bcolor" id="OrangeXBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_XTAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="OrangeXBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Bitvenus</td>
+                            <td id="Bitvenus_Status"></td>
+                            <td></td>
+                            <td id="BitvenusBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_BybitAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_OKXAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_GateioAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_HTXAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_LbankAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_BitmartAP"></td>                        
+                            <td></td>
+                            <td id="BitvenusBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_OrangeXAP"></td>
+                            <td class="bcolor" id="Bitvenus_LTP"></td>
+                            <td class="bcolor" id="BitvenusBP_BitvenusAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_XTAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="BitvenusBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Biconomy</td>
+                            <td id="Biconomy_Status"></td>
+                            <td></td>
+                            <td id="BiconomyBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_BybitAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_OKXAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_GateioAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_HTXAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_LbankAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_BitmartAP"></td>
+                            
+                            <td></td>
+                            <td id="BiconomyBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_BitvenusAP"></td>
+                            <td class="bcolor" id="Biconomy_LTP"></td>
+                            <td class="bcolor" id="BiconomyBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_XTAP"></td>
+                            
+                            <td></td>
+                            <td id="BiconomyBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="BiconomyBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">XT</td>
+                            <td id="XT_Status"></td>
+                            <td></td>
+                            <td id="XTBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="XTBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="XTBP_BybitAP"></td>
+                            <td></td>
+                            <td id="XTBP_OKXAP"></td>
+                            <td></td>
+                            <td id="XTBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="XTBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="XTBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="XTBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="XTBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="XTBP_GateioAP"></td>
+                            <td></td>
+                            <td id="XTBP_HTXAP"></td>
+                            <td></td>
+                            <td id="XTBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="XTBP_LbankAP"></td>
+                            <td></td>
+                            <td id="XTBP_BitmartAP"></td>
+                            
+                            <td></td>
+                            <td id="XTBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="XTBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="XTBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="XTBP_BitvenusAP"></td>
+                            
+                            <td></td>
+                            <td id="XTBP_BiconomyAP"></td>
+                            <td class="bcolor" id="XT_LTP"></td>
+                            <td class="bcolor" id="XTBP_XTAP"></td>
+                            <td></td>
+                            <td id="XTBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="XTBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="XTBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="XTBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="XTBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Bitflyr</td>
+                            <td id="Bitflyer_Status"></td>
+                            <td></td>
+                            <td id="BitflyerBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_BybitAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_OKXAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_GateioAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_HTXAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_MEXCAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_LbankAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_BitvenusAP"></td>
+                            
+                            <td></td>
+                            <td id="BitflyerBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_XTAP"></td>
+                            <td class="bcolor" id="Bitflyer_LTP"></td>
+                            <td class="bcolor" id="BitflyerBP_BitflyerAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="BitflyerBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">CoinW</td>
+                            <td id="CoinW_Status"></td>
+                            
+                            <td></td>
+                            <td id="CoinWBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_BybitAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_OKXAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_GateioAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_HTXAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_MEXCAP"></td>
+                        
+                            <td></td>
+                            <td id="CoinWBP_LbankAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_BitvenusAP"></td>
+                            
+                            <td></td>
+                            <td id="CoinWBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_XTAP"></td>
+                            
+                            <td></td>
+                            <td id="CoinWBP_BitflyerAP"></td>
+                            <td class="bcolor" id="CoinW_LTP"></td>
+                            <td class="bcolor" id="CoinWBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="CoinWBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Toobit</td>
+                            <td id="Toobit_Status"></td>
+                            <td></td>
+                            <td id="ToobitBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_BybitAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_OKXAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_GateioAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_HTXAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_MEXCAP"></td>
+                        
+                            <td></td>
+                            <td id="ToobitBP_LbankAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_BitvenusAP"></td>
+                            
+                            <td></td>
+                            <td id="ToobitBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_XTAP"></td>
+                            
+                            <td></td>
+                            <td id="ToobitBP_BitflyerAP"></td>
+                            
+                            <td></td>
+                            <td id="ToobitBP_CoinWAP"></td>
+                            <td class="bcolor" id="Toobit_LTP"></td>
+                            <td class="bcolor" id="ToobitBP_ToobitAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="ToobitBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">Tapbit</td>
+                            <td id="TapBit_Status"></td>
+                            <td></td>
+                            <td id="TapBitBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_BybitAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_OKXAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_GateioAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_HTXAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_MEXCAP"></td>
+                        
+                            <td></td>
+                            <td id="TapBitBP_LbankAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_BitvenusAP"></td>
+                            
+                            <td></td>
+                            <td id="TapBitBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_XTAP"></td>
+                            
+                            <td></td>
+                            <td id="TapBitBP_BitflyerAP"></td>
+                            
+                            <td></td>
+                            <td id="TapBitBP_CoinWAP"></td>
+                        
+                            <td></td>
+                            <td id="TapBitBP_ToobitAP"></td>
+                            <td class="bcolor" id="TapBit_LTP"></td>
+                            <td class="bcolor" id="TapBitBP_TapBitAP"></td>
+                            <td></td>
+                            <td id="TapBitBP_BingXAP"></td>
+                        </tr>
+                        <tr>
+                            <td  class="first_column">BingX</td>
+                            <td id="BingX_Status"></td>
+                            <td></td>
+                            <td id="BingXtBP_BinanceAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_KucoinAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_BybitAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_OKXAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_UpbitAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_KrakenAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_BitgetAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_BitstampAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_GeminiAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_GateioAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_HTXAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_MEXCAP"></td>
+                        
+                            <td></td>
+                            <td id="BingXtBP_LbankAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_BitmartAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_DeepcoinAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_BitfinexAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_OrangeXAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_BitvenusAP"></td>
+                            
+                            <td></td>
+                            <td id="BingXtBP_BiconomyAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_XTAP"></td>
+                            
+                            <td></td>
+                            <td id="BingXtBP_BitflyerAP"></td>
+                            
+                            <td></td>
+                            <td id="BingXtBP_CoinWAP"></td>
+                            <td></td>
+                            <td id="BingXtBP_ToobitAP"></td>
+                            
+                            <td></td>
+                            <td id="BingXtBP_TapBitAP"></td>
+                            <td class="bcolor" id="BingX_LTP"></td>
+                            <td class="bcolor" id="BingXtBP_BingXAP"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            <!-- </div>
+        </div> -->
+        </div>
+    </div>
+
+    <div class="container-fluid sectablecont">
+        <div class="row">
+            <div class="session_name">
+                <h4>Session for <span id="currency_name_headersession">ETHUSDT</span> Traded Across 25 Centralized Exchanges during</h4>
+            </div>
+            
+            <table class="table table-responsive">
+                
+                <thead>
+                    <th>SESSION<br>Description</th>
+                    <th>Current (UTC)<br> TIME</th>
+                    <th>Data Collect <br> Start Time</th>
+                    <th>Data Collect <br> Duration</th>
+                    <th>Data Collect <br> Available </th>
+                    <th>GMT <br> Current</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>HOURS:MINUTES</td>
+                        <td id="current_utc_time"></td>
+                        <td  id="current_time"></td>
+                        <td id="timelapse"></td>
+                        <td> <center>January 2024</center></td>
+                        <td id="current_gmt"></td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="container-fluid sectablecont">
+        <div class="row">
+            <div class="session_name">
+                <h4>Session Statistics for <span id="centralized_currency">ETHUSDT</span> Traded Across 25 Centralized Exchages: SPATIAL/PRICE ARBITRAGE</h4>
+            </div>
+            
+            <table class="table table-responsive" id="secondtable">
+                
+                <thead>
+                    <th class="sectistcolumn">Price Difference Category<br>(USDT)</th>
+                    <th><div id="count56"></div>USDT</th>
+                    <th><div id="count57"></div>USDT</th>
+                    <th><div id="count58"></div>USDT</th>
+                    <th><div id="count59"></div>USDT</th>
+                    <th><div id="count60"></div>USDT</th>
+                    
+                </thead>
+                <tbody>
+                    <tr class="sbrow">
+                        <td class="sectistcolumn">Number of Price Opportunities<br>Identified (Count#)</td>
+                        <td id="count0"></td>
+                        <td id="count10"></td>
+                        <td id="count20"></td>
+                        <td id="count30"></td>
+                        <td id="count50"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td class="sectistcolumn">Average Price Difference Per<br>Category (in USDT)</td>
+                        <td id="count1"></td>
+                        <td id="count11"></td>
+                        <td id="count21"></td>
+                        <td id="count31"></td>
+                        <td id="count51"></td>
+
+                    </tr>                    
+                    <tr>
+                        <td class="sectistcolumn">Average Volume Per trade Per<br>Category (Volume)</td>
+                        <td id="count2"></td>
+                        <td id="count12"></td>
+                        <td id="count22"></td>
+                        <td id="count32"></td>
+                        <td id="count52"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="sectistcolumn">Average $Value of Opportunities<br>Per Category(USDT)</td>
+                        <td id="count5"></td>
+                        <td id="count15"></td>
+                        <td id="count25"></td>
+                        <td id="count35"></td>
+                        <td id="count55"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="sectistcolumn">Min Volume Per trade Per<br>Category (Volume)</td>
+                        <td id="count101"></td>
+                        <td id="count102"></td>
+                        <td id="count103"></td>
+                        <td id="count104"></td>
+                        <td id="count105"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="sectistcolumn">Median Volume Per trade Per<br>Category (Volume)</td>
+                        <td id="count3"></td>
+                        <td id="count13"></td>
+                        <td id="count23"></td>
+                        <td id="count33"></td>
+                        <td id="count53"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="sectistcolumn">Max Volume Per trade Per<br>Category (Volume)</td>
+                        <td id="count4"></td>
+                        <td id="count14"></td>
+                        <td id="count24"></td>
+                        <td id="count34"></td>
+                        <td id="count54"></td>
+
+                    </tr>
+                    
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="container-fluid sectablecont">
+        <div class="row">
+            <div class="session_name">
+                <h4>Session for <span id="scurrency_name_headersession"></span> Traded Across 25 Centralized Exchanges during</h4>
+            </div>
+            
+            <table class="table table-responsive">
+                
+                <thead>
+                    <th>SESSION<br>Description</th>
+                    <th>Current (UTC)<br> TIME</th>
+                    <th>Data Collect <br> Start Time</th>
+                    <th>Data Collect <br> Duration</th>
+                    <th>Data Collect <br> Available </th>
+                    <th>GMT <br> Current</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>HOURS:MINUTES</td>
+                        <td id="scurrent_utc_time"></td>
+                        <td  id="scurrent_time"></td>
+                        <td id="stimelaps">24-Hours</td>
+                        <td> <center>January 2024</center></td>
+                        <td id="scurrent_gmt"></td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="container-fluid sectablecont">
+        <div class="row">
+            <div class="session_name">
+                <h4>Session Statistics for <span id="scentralized_currency">ETHUSDT</span> Traded Across 25 Centralized Exchages: SPATIAL/PRICE ARBITRAGE</h4>
+            </div>
+            
+            <table class="table table-responsive" id="secondtable">
+                
+                <thead>
+                    <th class="sectistcolumn">Price Difference Category<br>(USDT)</th>
+                    <th><div id="counts56"></div>USDT</th>
+                    <th><div id="counts57"></div>USDT</th>
+                    <th><div id="counts58"></div>USDT</th>
+                    <th><div id="counts59"></div>USDT</th>
+                    <th><div id="counts60"></div>USDT</th>
+                    
+                </thead>
+                <tbody>
+                    <tr class="sbrow">
+                        <td class="sectistcolumn">Number of Price Opportunities<br>Identified (Count#)</td>
+                        <td id="counts0"></td>
+                        <td id="counts10"></td>
+                        <td id="counts20"></td>
+                        <td id="counts30"></td>
+                        <td id="counts50"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td class="sectistcolumn">Average Price Difference Per<br>Category (in USDT)</td>
+                        <td id="counts1"></td>
+                        <td id="counts11"></td>
+                        <td id="counts21"></td>
+                        <td id="counts31"></td>
+                        <td id="counts51"></td>
+
+                    </tr>
+                    
+                    <tr>
+                        <td class="sectistcolumn">Average Volume Per trade Per<br>Category (Volume)</td>
+                        <td id="counts2"></td>
+                        <td id="counts12"></td>
+                        <td id="counts22"></td>
+                        <td id="counts32"></td>
+                        <td id="counts52"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="sectistcolumn">Average $Value of Opportunities<br>Per Category(USDT)</td>
+                        <td id="counts5"></td>
+                        <td id="counts15"></td>
+                        <td id="counts25"></td>
+                        <td id="counts35"></td>
+                        <td id="counts55"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="sectistcolumn">Min Volume Per trade Per<br>Category (Volume)</td>
+                        <td id="counts101"></td>
+                        <td id="counts102"></td>
+                        <td id="counts103"></td>
+                        <td id="counts104"></td>
+                        <td id="counts105"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="sectistcolumn">Median Volume Per trade Per<br>Category (Volume)</td>
+                        <td id="counts3"></td>
+                        <td id="counts13"></td>
+                        <td id="counts23"></td>
+                        <td id="counts33"></td>
+                        <td id="counts53"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="sectistcolumn">Max Volume Per trade Per<br>Category (Volume)</td>
+                        <td id="counts4"></td>
+                        <td id="counts14"></td>
+                        <td id="counts24"></td>
+                        <td id="counts34"></td>
+                        <td id="counts54"></td>
+
+                    </tr>
+                    
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <!-- </div>
+
+        
+
+        </div>
+    </div> -->
+
+    <script>
+        
+ 
+        function calculateTimeDifference(startTime, startDate) {
+            // Split the start time
+            var startTimeParts = startTime.split(':');
+            var givenHour = parseInt(startTimeParts[0], 10);
+            var givenMinutes = parseInt(startTimeParts[1], 10);
+            var givenSeconds = parseInt(startTimeParts[2], 10);
+
+            // Split the start date
+            var startDateParts = startDate.split('-');
+            var givenYear = parseInt(startDateParts[0], 10);
+            var givenMonth = parseInt(startDateParts[1], 10) - 1; // Months are zero-indexed in JavaScript
+            var givenDay = parseInt(startDateParts[2], 10);
+
+            // Create a new Date object for the given start date and time
+            var startDateTime = new Date(givenYear, givenMonth, givenDay, givenHour, givenMinutes, givenSeconds);
+
+            // Get current time
+            var currentTime = new Date();
+
+            // Calculate time difference in milliseconds
+            var timeDifferenceMilliseconds = currentTime - startDateTime;
+
+            // Convert milliseconds to seconds
+            var timeDifferenceSeconds = Math.floor(timeDifferenceMilliseconds / 1000);
+
+            // If the current time is earlier than the start time, add 24 hours in seconds
+            if (timeDifferenceSeconds < 0) {
+                timeDifferenceSeconds += 24 * 3600;
+            }
+
+            // Calculate days, hours, minutes, and seconds
+            var totalDays = Math.floor(timeDifferenceSeconds / (24 * 3600));
+            var remainingSeconds = timeDifferenceSeconds % (24 * 3600);
+            var totalHours = Math.floor(remainingSeconds / 3600);
+            var totalMinutes = Math.floor((remainingSeconds % 3600) / 60);
+            var totalSeconds = Math.floor(remainingSeconds % 60);
+
+            // Format days, hours, minutes, and seconds
+            var days = totalDays;
+            var hours = totalHours < 10 ? "0" + totalHours : totalHours;
+            var minutes = totalMinutes < 10 ? "0" + totalMinutes : totalMinutes;
+            var seconds = totalSeconds < 10 ? "0" + totalSeconds : totalSeconds;
+
+            return "Day " + days + ", " + hours + ":" + minutes + ":" + seconds;
+        }
+        $('.btn-custom').on('click', function(){
+            $('.btn-custom').removeClass('active');
+            $(this).addClass('active');
+        });
+
+
+        let counter = 0;
+        function updateTableData(currency) {
+            $.ajax({
+                url: '/eth/price',
+                method: 'GET',
+                success: function(response) {
+                    
+                    // Update table cells with new data
+                    $.each(response.updated_data, function(key, value) {
+                        $('#' + key).text(value);
+        
+
+                    });
+                    
+                    event.preventDefault(); // Prevent form submission
+                    var searchValue = parseInt($('#searchValue').val());
+    
+                    // Apply highlighting to table cells based on search value
+                    $('#dataTable tbody td').removeClass('highlight'); // Remove existing highlight class from all cells
+                    $('#dataTable tbody td').removeClass('highlight1');
+                    $('#dataTable tbody td').removeClass('background_blue');
+
+                    $('#dataTable tbody td').each(function() {
+                        if ($(this).attr('id') === 'Binance_LTP' || $(this).attr('id')=='BinanceBP_BinanceAP' || $(this).attr('id') === 'Kucoin_LTP'  || $(this).attr('id') === 'Bybit_LTP' || $(this).attr('id')=='BybitBP_BybitAP'  || $(this).attr('id') === 'OKX_LTP' || $(this).attr('id') === 'Upbit_LTP' || $(this).attr('id') === 'Kraken_Ltp' || $(this).attr('id') === 'Bitget_LTP' 
+                        || $(this).attr('id') === 'Bitstamp_LTP'  || $(this).attr('id') === 'Gemini_LTP'  || $(this).attr('id') === 'Gateio_LTP' || $(this).attr('id') === 'HTX_LTP' || $(this).attr('id') === 'Bitfinex_LTP' 
+                        || $(this).attr('id') === 'MEXC_LTP' || $(this).attr('id') === 'Lbank_LTP' || $(this).attr('id') === 'Bitmart_LTP' || $(this).attr('id') === 'Deepcoin_LTP' || $(this).attr('id') === 'BingX_LTP' 
+                        || $(this).attr('id') === 'OrangeX_LTP' || $(this).attr('id') === 'Bitvenus_LTP' || $(this).attr('id') === 'Biconomy_LTP' || $(this).attr('id') === 'XT_LTP' || $(this).attr('id') === 'Bitflyer_LTP'
+                        || $(this).attr('id') === 'CoinW_LTP' || $(this).attr('id') === 'Toobit_LTP' || $(this).attr('id') === 'TapBit_LTP' || $(this).attr('id') === 'KucoinBP_KucoinAP' || $(this).attr('id') === 'OKXBP_OKXAP' 
+                        || $(this).attr('id') === 'KrakenBP_KrakenAP' || $(this).attr('id') === 'BitgetBP_BitgetAP' || $(this).attr('id') === 'BitstampBP_BitstampAP' || $(this).attr('id') === 'GeminiBP_GeminiAP' || $(this).attr('id') === 'MEXCBP_MEXCAP'
+                        || $(this).attr('id') === 'DeepcoinBP_DeepcoinAP'  || $(this).attr('id') === 'UpbitBP_UpbitAP'  || $(this).attr('id') === 'GateiotBP_GateioAP'  || $(this).attr('id') === 'HTXBP_HTXAP'  || $(this).attr('id') === 'LbankBP_LbankAP'  
+                        || $(this).attr('id') === 'LbankBP_LbankAP' || $(this).attr('id') === 'BitmartBP_BitmartAP' || $(this).attr('id') === 'BitfinexBP_BitfinexAP' || $(this).attr('id') === 'OrangeXBP_OrangeXAP' || $(this).attr('id') === 'BitvenusBP_BitvenusAP' 
+                        || $(this).attr('id') === 'BiconomyBP_BiconomyAP' || $(this).attr('id') === 'XTBP_XTAP' || $(this).attr('id') === 'BitflyerBP_BitflyerAP' || $(this).attr('id') === 'CoinWBP_CoinWAP' 
+                        || $(this).attr('id') === 'ToobitBP_ToobitAP' || $(this).attr('id') === 'TapBitBP_TapBitAP' || $(this).attr('id') === 'BingXtBP_BingXAP') {
+                            return true; // Continue to the next iteration
+                        }
+                        var cellValue = parseInt($(this).text()); // Get the cell value and parse as integer
+                        if (!isNaN(cellValue)){
+                            $(this).addClass('cell_border');
+                        }
+                        if (!isNaN(cellValue) && cellValue >= 5 && cellValue <= 29) {
+                            $(this).addClass('highlight1'); // Add highlight class if the cell value is equal or greater than 50
+                            $(this).addClass('cell_border');
+                        }else if (!isNaN(cellValue) && cellValue >= 30){
+                            $(this).addClass('background_blue'); // Add highlight class if the cell value is equal or greater than 50
+                            $(this).addClass('cell_border');
+                        }
+                        if (!isNaN(cellValue) && cellValue >= searchValue) {
+                            $(this).addClass('highlight', ''); // Add highlight class if the cell value is equal or greater than the search value
+                            $(this).addClass('cell_border');
+                        }
+                        if (cellValue < 0 && cellValue >= 0) {
+                            // $(this).addClass('highlight', ''); // Add highlight class if the cell value is equal or greater than the search value
+                            $(this).addClass('cell_border');
+                        }
+                    });
+                    
+                    const cellIDs = ['BinanceBP_BinanceAP', 'BybitBP_BybitAP', 'KucoinBP_KucoinAP', 'OKXBP_OKXAP', 'GateiotBP_GateioAP', 
+                                            'UpbitBP_UpbitAP', 'KrakenBP_KrakenAP', 'BitgetBP_BitgetAP', 'BitstampBP_BitstampAP', 'GeminiBP_GeminiAP', 
+                                            'HTXBP_HTXAP', 'MEXCBP_MEXCAP', 'LbankBP_LbankAP', 'BitmartBP_BitmartAP', 'DeepcoinBP_DeepcoinAP', 
+                                            'BitfinexBP_BitfinexAP', 'OrangeXBP_OrangeXAP', 'BiconomyBP_BiconomyAP', 'XTBP_XTAP', 'BitflyerBP_BitflyerAP', 
+                                            'CoinWBP_CoinWAP', 'ToobitBP_ToobitAP', 'TapBitBP_TapBitAP', 'BingXtBP_BingXAP', 'BitvenusBP_BitvenusAP'];
+
+                            // Iterate through each cell ID and check the condition
+                          
+
+                            // Iterate through each cell ID and check the condition
+                            cellIDs.forEach(id => {
+                                const cell = $(`#${id}`);
+                                if (cell.length) {
+                                    checkAndHighlight(cell);
+                                }
+                            });
+                    
+                            function checkAndHighlight(cell) {
+                                const row = cell.closest('tr');
+                                const table = $('#dataTable');
+                                const cellIndex = cell.index();
+
+                                // Check the value of the second column in the row
+                                const secondColumnValue = row.children().eq(1).text().toLowerCase();
+
+                                if (secondColumnValue === 'not ok') {
+                                    var cells = row.children('td').slice(2);
+                                    cells.removeClass('highlight');
+                                    row.children().eq(1).addClass('colorred');
+                                    cells.removeClass('highlight1');
+                                    cells.removeClass('background_blue');
+
+                                    cells.each(function(index) {
+                                        var cell = $(this);
+                                        var cellText = cell.text().trim(); // Get the cell text and trim any extra whitespace
+
+                                        if (cellText != '') { 
+                                            // Check if the index is odd (0-based index), cell is empty, and background color is red
+                                            cell.text('-');
+                                        }
+                                    });
+                                                                        table.find('tr').slice(2).each(function() {
+                                    
+                                        $(this).children().eq(cellIndex).removeClass('highlight1');
+                                        $(this).children().eq(cellIndex).removeClass('highlight');
+                                        $(this).children().eq(cellIndex).removeClass('background_blue');
+                                        $(this).children().eq(cellIndex).text('-')
+                                    });
+                                }else if(secondColumnValue === 'ok'){
+                                    row.children().eq(1).addClass('ok_background');
+                                    row.children().removeClass('colorred');
+                                }
+                            }
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                }
+            });
+        }
+        function maintabledata(currency){
+            intervalId = setInterval(function() {
+                current_utc_gmt()
+                updateTableData(currency);
+            }, 1000);
+        }
+        
+        let intervalId;
+        let intervalId1;
+        // let selectedOption = $('#currency_option').val();
+        $('#currency_option').val('BTCUSDT');
+        selectedOption = $('#currency_option').val(); 
+        function sendToserver(selectedOption){
+            intervalId1 = setInterval(function() {
+                    $.ajax({
+                        url: '/main2/eth/price',
+                        type: 'GET',
+                        data: { option: selectedOption },
+                        success: function(response) {
+                            $.each(response.classified_values, function(key, value) {
+                                $("#count" + key).text(value);
+                                var elapsedTime = calculateTimeDifference(response.current_time[0], response.current_time[1]);
+                                $('#timelapse').text(elapsedTime);
+                                $('#current_time').text(response.current_time[0]);
+                                $('#currency_name_header').text(selectedOption);
+                                $('#currency_name_headersession').text(selectedOption);
+                                $('#centralized_currency').text(selectedOption);
+
+                            });
+                        }
+                    });
+                    $.ajax({
+                        url: '/main2s/eth/price',
+                        type: 'GET',
+                        data: { option: selectedOption },
+                        success: function(response) {
+                            $.each(response.classified_values, function(key, value) {
+                                $("#counts" + key).text(value);
+                                var elapsedTime = calculateTimeDifference(response.current_time[0], response.current_time[1]);
+                                $('#stimelapse').text(elapsedTime);
+                                $('#scurrent_time').text(response.current_time[0]);
+                                // $('#scurrency_name_header').text(selectedOption);
+                                $('#scurrency_name_headersession').text(selectedOption);
+                                $('#scentralized_currency').text(selectedOption);
+
+                            });
+                        }
+                    });
+                }, 1000); // 1000 milliseconds = 1 second
+        }
+        function current_utc_gmt(){
+            const now = new Date();
+            const year = now.getUTCFullYear();
+            const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+            const day = String(now.getUTCDate()).padStart(2, '0');
+            const hours = String(now.getUTCHours()).padStart(2, '0');
+            const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+
+            // Format the UTC time as a string
+            const utcTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+            const offsetMinutes = new Date().getTimezoneOffset();
+            
+            // Convert offset to hours and minutes
+            const offsetHours = Math.floor(Math.abs(offsetMinutes) / 60);
+            const offsetSign = offsetMinutes > 0 ? '-' : '+';
+
+            // Format the offset as GMT±HH:MM
+            const gmtOffset = `${offsetSign}${String(offsetHours).padStart(2, '0')}GMT`;
+
+            // Display the GMT offset
+            $('#current_gmt').text(gmtOffset);
+            $('#scurrent_gmt').text(gmtOffset);
+            // Display the UTC time
+            $('#current_utc_time').text(utcTime);
+            $('#scurrent_utc_time').text(utcTime); 
+        }
+        $(document).ready(function() {
+            
+            $('#searchForm').submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+            });
+            maintabledata(selectedOption);
+            sendToserver(selectedOption);
+            $('#currency_option').change(function() {
+                clearInterval(intervalId); // Clear any existing interval to avoid multiple intervals running
+                
+                const selectedOption = $(this).val();
+                $('#currency_name_header').text(selectedOption);
+                $('#currency_name_headersession').text(selectedOption);
+                $('#centralized_currency').text(selectedOption);
+                maintabledata(selectedOption);
+            });
+            $('#currency_option').change(function() {
+                clearInterval(intervalId1);
+                const selectedOption = $(this).val();
+                sendToserver(selectedOption);
+            });
+        });
+        $(document).ready(function(){
+            $("table tr").each(function(rowIndex) {
+                $(this).find("td").each(function(colIndex) {
+                    var tdId = $(this).attr("id");
+                    console.log("Row: " + rowIndex + ", Column: " + colIndex + ", ID: " + tdId);
+                });
+            });
+        });
+
+    </script>
+    
+    
+</body>
+</html>

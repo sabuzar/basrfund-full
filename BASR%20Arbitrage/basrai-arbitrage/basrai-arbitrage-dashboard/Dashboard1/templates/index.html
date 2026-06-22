@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Static HTML Page</title>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			overflow: auto; /* Prevents scrolling */
+		}
+		table{
+			table-layout: fixed;
+		}
+		.container {
+			width: 1331px;
+    		margin: 9px 0 0px 6px;
+		}
+		.row {
+			display: flex;
+			text-align: center;
+		}
+		.col-4 {
+			width: 33.5%; /* Fixed width for each column */
+			padding: 10px;
+			box-sizing: border-box;
+		}
+		.first-row .col-4:nth-child(1) {
+			background-color: #d9d9d9;
+			color: #c94040;
+		}
+		.first-row .col-4:nth-child(2) {
+			background-color: #f2f2f2;
+			color: #ff0101;
+			font-weight: 700;
+		}
+		.first-row .col-4:nth-child(3) {
+			background-color: #d9d9d9;
+		}
+		.second-row {
+			display: flex;
+			width: 33.8%;;
+			margin-left: 33.1%;
+			margin-top: -2px; /* Aligns with the border */
+			font-size: 13px;
+		}
+		.second-row .col-4 {
+			width: 100%;
+			padding: 10px;
+			box-sizing: border-box;
+			background-color: #d9d9d9;
+			border: 1px solid lightgrey;
+			color: #3e5a83;
+		}
+		.second-row table th{
+			flex: 1;
+			padding: 10px;
+			background-color: #c5dfb2;
+			text-align: center;
+			box-sizing: border-box;
+
+		}
+		.second-row .col:last-child {
+			border-right: none; /* Removes border from the last column */
+		}
+		.third-row {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 33.9%;
+			margin-left: 439.5px;
+			background-color: #f2f2f2;
+			color: red;
+			line-height: 2.5;
+			font-size: 13px;
+
+		}
+		.fourth-row .col-4:nth-child(1) {
+
+			color: #3e5a83;
+			border-left: 3px solid #8eaadc;
+			background-color:#d9d9d9;
+		}
+		.exchange-1 {
+			background-color: yellow;
+			padding: 8px 0px 10px 0px;
+			font-size: 16px;
+			width: 105.3%;
+			margin-top: -9px;
+			margin-left: -11px;
+			margin-bottom: 6px;
+			border-left: 1px solid #8eaadc;
+		}
+
+		.fourth-row .col-4:nth-child(2) {
+			background-color: white;
+		}
+		.fourth-row .col-4:nth-child(3) {
+			border-left: 3px solid #8eaadc;
+			color: #3e5a83;
+			
+			background-color:#d9d9d9;
+		}
+		.fifth-row .col-4:nth-child(1) {
+		border-right: 3px solid #8eaadc;
+			color: black;
+		}
+		.fifth-row .col-4:nth-child(2) {
+			background-color: white;
+		}
+		.fifth-row .col-4:nth-child(3) {
+			border-left: 3px solid #8eaadc;
+			color: black;
+
+		}
+		.table-row {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.exchange-table {
+			width: 105.7%; /* Full width of the container */
+			border-collapse: collapse; /* Ensures cells have shared borders */
+			margin-bottom: -11px;
+			margin-top: -10.5px;
+			margin-left: -11px;
+
+		}
+		.exchange-table12 {
+			width: 107%; /* Full width of the container */
+
+			border-collapse: collapse;
+			margin-bottom: -11px;
+			margin-top: -10px;
+			margin-left: -11px;
+		}
+		.exchange-table12 th, .exchange-table12 td {
+
+
+			text-align: center;
+			font-size: 12px;
+		}
+		.exchange-table123 {
+			width: 106%; /* Full width of the container */
+			border-left: 2px solid #8eaadc;
+			border-collapse: collapse;
+			margin-bottom: -11px;
+			margin-top: -10px;
+			margin-left: -12px;
+		}
+		.exchange-table123 th, .exchange-table123 td {
+			border: 0.1px solid lightblue;
+			padding: 8px;
+			text-align: center;
+			font-size: 12px;
+		}
+		.exchange-table th, .exchange-table td {
+			border: 0.1px solid lightblue;
+			padding: 8px;
+			text-align: center;
+			font-size: 12px;
+		}
+		.sixt-row-exchange-table1 th, .sixt-row-exchange-table1 td {
+			border: 0.1px solid lightblue;
+			padding: 8px;
+			text-align: center;
+			font-size: 12px;
+		}
+
+		.exchange-table th {
+			background-color: #f2f2f2; /* Header background color */
+			border:none;
+		}
+		.sixt-row-exchange-table{
+			width: 105.5%; /* Full width of the container */
+			border-collapse: collapse; /* Ensures cells have shared borders */
+			margin-top:-9px;
+			margin-left: -12px;
+			margin-bottom: -10px;
+		}
+		.sixt-row-exchange-table th,.sixt-row-exchange-table td{
+			border: 0.1px solid lightblue;
+			padding: 8px;
+			text-align: center;
+			font-size: 12px;
+		}
+		.sixt-row-exchange-table th {
+			color: #3e5a83;
+			
+			background-color:#d9d9d9;
+			border:none;
+		}
+
+		.sixt-row-exchange-table1{
+			width: 106%; /* Full width of the container */
+			border-collapse: collapse; /* Ensures cells have shared borders */
+			margin-left: -14px;
+			margin-top: -11px;
+			margin-bottom: -12px;
+		}
+		.sixt-row-exchange-table1 th,.sixt-row-exchange-table1 td{
+
+			padding: 8px;
+			text-align: center;
+			font-size: 12px;
+		}
+		.sixt-row-exchange-table1 th {
+			background-color: #90D26D; /* Header background color */
+			border: none;
+			line-height: 11px;
+			font-size: 12px;
+		}
+		.sixth-row .col-4:nth-child(1) {
+			border-right: 3px solid #8eaadc;
+
+		}
+		/* .sixth-row .col-4:nth-child(2) {
+
+
+		} */
+		.sixth-row .col-4:nth-child(3) {
+
+			border-left: 3px solid #8eaadc;
+		}
+		.seventh-row .col-4:nth-child(1) {
+			background-color: #8eaadc;
+
+		}
+		.seventh-row .col-4:nth-child(2) {
+			background-color: #8eaadc;
+		}
+		.seventh-row .col-4:nth-child(3) {
+			background-color: #8eaadc;
+		}
+		.eight-row .col-4:nth-child(1) {
+			background-color: #8eaadc;
+
+		}
+		.eight-row .col-4:nth-child(2) {
+
+			background-color: white;
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		.eight-row .col-4:nth-child(3) {
+			background-color: #8eaadc;
+		}
+		.nine-row .col-4:nth-child(1) {
+			background-color: #8eaadc;
+
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		.nine-row .col-4:nth-child(2) {
+			background-color: #e1dcdc;
+			color: red;
+			line-height: 0px;
+			font-size: 9px;
+		}
+		.nine-row .col-4:nth-child(3) {
+			background-color: #8eaadc;
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		.inner-div {
+			background-color: white;
+			padding: 10px;
+			text-align: center;
+			margin-top:-10px;
+		}
+		.inner-div1 {
+			background-color: #e1dcdc;
+			padding: 10px;
+			text-align: center;
+			margin-top:-10px;
+		}
+		.inner-div8 {
+			background-color: #8eaadc;
+			padding: 10px;
+			text-align: center;
+			margin-top:-10px;
+		}
+		.ten-row .col-4:nth-child(1) {
+			background-color: #8eaadc;
+
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		.ten-row .col-4:nth-child(2) {
+			background-color: #8eaadc;
+
+			line-height: 0px;
+			font-size: 9px;
+		}
+		.ten-row .col-4:nth-child(3) {
+			background-color: #8eaadc;
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		.eleven-row .col-4:nth-child(1) {
+			background-color: #8eaadc;
+
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		.eleven-row .col-4:nth-child(2) {
+			background-color: #c38d00;
+
+			line-height: 0px;
+			font-size: 9px;
+		}
+		.eleven-row .col-4:nth-child(3) {
+			background-color: #8eaadc;
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		.twelve-row .col-4:nth-child(1) {
+			background-color: #8eaadc;
+
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		.twelve-row .col-4:nth-child(2) {
+			background-color: #fed967;
+
+			line-height: 0px;
+			font-size: 9px;
+		}
+		.twelve-row .col-4:nth-child(3) {
+			background-color: #8eaadc;
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		.thirteen-row .col-4:nth-child(1) {
+			background-color: #8eaadc;
+
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		.thirteen-row .col-4:nth-child(2) {
+			background-color: #f3dfa0;
+
+			line-height: 0px;
+			font-size: 9px;
+		}
+		.thirteen-row .col-4:nth-child(3) {
+			background-color: #8eaadc;
+			color: red;
+			line-height: 0px;
+			font-size: 11px;
+		}
+		/* .check_value1 {
+			 background-color: #FFD1E3; 
+		} */
+		.check_value {
+			background-color: #FFD1E3;
+		}
+		.myTable thead{
+
+			border-left: 1px solid #8eaadc;
+			border-right: 1px solid #8eaadc;
+			height: 37px;
+
+		}
+		.myTable td{
+			max-width: 30px; /* Adjust the value as needed */
+			width: 30px;
+			font-size: 17px;
+			overflow: hidden;
+			height: 18.9px;
+			padding: none;
+			white-space: nowrap; /* Prevent content from wrapping */
+		}
+
+		.myTable th {
+			width: 30px;
+			max-width: 30px; /* Adjust the value as needed */
+			white-space: nowrap; /* Prevent content from wrapping */
+
+		}
+		.myTable1 thead{
+
+			border-left: 1px solid #8eaadc;
+			border-right: 1px solid #8eaadc;
+			height: 47px;
+
+		}
+		.myTable1 td{
+			max-width: 30px; /* Adjust the value as needed */
+			width: 30px;
+			overflow: hidden;
+			height: 18.9px;
+			font-size: 17px;
+			padding: none;
+			white-space: nowrap; /* Prevent content from wrapping */
+		}
+		.myTable1 th {
+			width: 30px;
+			font-size: 10px;
+			max-width: 30px; /* Adjust the value as needed */
+			white-space: nowrap; /* Prevent content from wrapping */
+
+		}
+		.red{
+			background-color: red;
+		}
+		.blue{
+			background-color: blue;
+		}
+	</style>
+            
+            
+	</head>
+	<body>
+		<div class="container">
+			<div class="row first-row">
+				<div class="col-4">
+					Input target minimum difference threshold to track
+				</div>
+				<div class="col-4">
+					BTCUSDT
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row second-row">
+				<div class="col-4">Price<br>Difference ($)</div>
+				<div class="col-4">Price<br>Difference (%)</div>
+				<div class="col-4">Transaction<br>Cost (TC)</div>
+				<div class="col-4">NET ($)</div>
+				<div class="col-4">Net %</div>
+			</div>
+			<div class="row third-row">
+				TRACKER 01
+			</div>
+			<div class="row fourth-row">
+				<div class="col-4">Exchange-1</div>
+				<div class="col-4"></div>
+				<div class="col-4">Exchange-2</div>
+			</div>
+			<div class="row fifth-row">
+				<div class="col-4">
+					<table class="exchange-table" id="exchange-table-1">
+						<thead>
+							<tr>
+								<th>Price</th>
+								<th>Bid</th>
+								<th></th> <!-- Empty column -->
+								<th>Ask</th>
+								<th>Units</th>
+								<th>Time</th>
+							</tr>
+						</thead>
+						<tbody>
+                            
+						</tbody>
+					</table>
+				</div>
+				<div class="col-4"></div>
+				<div class="col-4">
+					<table class="exchange-table" id="exchange-table-2">
+						<thead>
+							<tr>
+								<th>Price</th>
+								<th>Bid</th>
+								<th></th> <!-- Empty column -->
+								<th>Ask</th>
+								<th>Units</th>
+								<th>Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row sixth-row">
+				<div class="col-4">
+					<table class="sixt-row-exchange-table" id="sixt-row-exchange-table_id">
+						<thead>
+							<tr>
+								<th>Ex1-TRP</th>
+								<th></th>
+								<th>Ex1-TRP</th> <!-- Empty column -->
+								<th></th>
+								<th>EX1-TV</th>
+								<th>EX1-TS</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="col-4">
+					<table class="sixt-row-exchange-table1" >
+						<thead>
+							<tr>
+								<th>TRP-Diff$</th>
+								<th>TRP-Diff%</th>
+								<th>Separate Table to map per Exchange</th> <!-- Empty column -->
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="col-4">
+					<table class="sixt-row-exchange-table" id = "sixt-row-exchange-table-id">
+						<thead>
+							<tr>
+								<th>Ex1-TRP</th>
+								<th></th>
+								<th>Ex1-TRP</th> <!-- Empty column -->
+								<th></th>
+								<th>EX1-TV</th>
+								<th>EX1-TS</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row seventh-row">
+				<div class="col-4">
+					
+				</div>
+				<div class="col-4">
+					
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row eight-row">
+				<div class="col-4">
+					
+				</div>
+				<div class="col-4">
+					Trade Execution Performance Benchmarks
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row nine-row">
+				<div class="col-4">
+					<div class='inner-div'>
+						System STATS Summary
+					</div>
+				</div>
+				<div class="col-4">
+					Market Matrix for Universal Overview across instruments exchanges and arbitrage types
+				</div>
+				<div class="col-4">
+					<div class='inner-div'>
+						Market STATS Summary
+					</div>
+				</div>
+			</div>
+			<div class="row eight-row">
+				<div class="col-4">
+					
+				</div>
+				<div class="col-4">
+					Arbitrage Type vs  Risk Return Profile 
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row ten-row">
+				<div class="col-4">
+					<div class='inner-div'>
+						System STATS Summary
+					</div>
+				</div>
+				<div class="col-4">
+					
+					Graphs
+					
+					
+				</div>
+				<div class="col-4">
+					<div class='inner-div'>
+						Market STATS Summary
+					</div>
+				</div>
+			</div>
+			<div class="row eleven-row">
+				<div class="col-4">
+					
+				</div>
+				<div class="col-4">
+					
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row twelve-row">
+				<div class="col-4">
+					
+				</div>
+				<div class="col-4">
+					 
+				</div>
+				<div class="col-4"></div>
+			</div>
+			<div class="row thirteen-row">
+				<div class="col-4">
+					
+				</div>
+				<div class="col-4">
+					Arbitrage Type vs  Risk Return Profile 
+				</div>
+				<div class="col-4"></div>
+			</div>
+		</div>
+
+    <script>
+        // Function to fetch data and update the table
+        function fetchDataAndUpdate() {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    updateTable('exchange-table-1', data);
+                    updateTable('exchange-table-2', data);
+                    updateTable('sixt-row-exchange-table-id', data);
+                    updateTable('sixt-row-exchange-table_id', data);
+                });
+        }
+
+        // Function to update table with new data
+        function updateTable(tableId, data) {
+            const tableBody = document.querySelector(`#${tableId} tbody`);
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            for (const [key, value] of Object.entries(data)) {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td></td>
+                    <td></td>
+                    <td class="value-cell">${key}</td>
+                    <td class="value-cell">${value}</td>
+                    <td></td>
+                    <td></td>
+                `;
+
+                tableBody.appendChild(row);
+            }
+
+            styleTableCells(); // Apply styles based on cell value
+        }
+
+        // Function to apply styles based on cell value
+        function styleTableCells() {
+            const cells = document.querySelectorAll('.value-cell');
+
+            cells.forEach(cell => {
+                const cellValue = cell.textContent.trim();
+
+                cell.classList.remove('red', 'blue'); // Reset classes
+
+                if (cellValue === '-') {
+                    cell.classList.add('red');
+                } else {
+                    const value = parseInt(cellValue, 10);
+                    if (!isNaN(value)) {
+                        if (value > 100) {
+                            cell.classList.add('blue');
+                        } else if (value < 0) {
+                            cell.classList.add('red');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Fetch data and update the table every 1 milliseconds
+        setInterval(fetchDataAndUpdate, 100);
+    </script>
+</body>
+</html>
